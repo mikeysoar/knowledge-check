@@ -10,12 +10,13 @@ var option2 = document.getElementById('option-2');
 var option3 = document.getElementById('option-3');
 var option4 = document.getElementById('option-4');
 var answer = document.getElementById('answer');
+var score = document.getElementById('score');
 
 var currentQuestion = 0;
 
 var message = ' All Done!';
-challenge.style.display="none";
-results.style.display="none";
+challenge.style.display = "none";
+results.style.display = "none";
 option1.addEventListener("click", checkAnswer);
 option2.addEventListener("click", checkAnswer);
 option3.addEventListener("click", checkAnswer);
@@ -28,9 +29,9 @@ function countdown() {
         if (timLeft > 1) {
             timerEl.textContent = timeLeft;
             timerLeft--;
-        // } else if (timLeft === 1) {
-        //     timerEl.textContent = timeLeft;
-        //     timeLeft--;
+            // } else if (timLeft === 1) {
+            //     timerEl.textContent = timeLeft;
+            //     timeLeft--;
         } else {
             timerEl.textContent = '';
             clearInterval(timeInterval);
@@ -40,28 +41,14 @@ function countdown() {
 }
 
 var body = document.body;
-var h1El = document.createElement("h1");
-var para = document.createElement("p");
-var h3El = document.createElement("h3");
-
-
-''
-// h1El.textContent = "Coding Quiz Challenge";
-// h1El.setAttribute('style', 'margin:auto; text-align:Center');
-// body.appendChild(h1El);
-
-
-// var node = document.createTextNode('Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!');
-// h3El.setAttribute('style', 'margin:auto; width:50%; text-align:center;');
-// para.appendChild(node);
-// var element = document.getElementById('challenge');
-// element.appendChild(para);
-
+// var h1El = document.createElement("h1");
+// var para = document.createElement("p");
+// var h3El = document.createElement("h3");
 
 // Coding Quiz Challenge
 var questionsDB = [
     {
-        question: "Commonly used data types Do NoT include:",
+        question: "Commonly used data types DO NOT include:",
         answers: [
             "Strings",
             "Booleans",
@@ -112,49 +99,52 @@ var questionsDB = [
     },
 ]
 
-var score = 0;
+var score1 = 0;
 
 //start quiz
 
 function startGame() {
 
-    challenge.style.display="block";
-    instructions.style.display="none";
-    DisplayQuestions(); 
-console.log(currentQuestion);
+    challenge.style.display = "block";
+    instructions.style.display = "none";
+    DisplayQuestions();
+    console.log(currentQuestion);
 
-var currentQuestionTitle = currentQuestion.question
-console.log(currentQuestionTitle);
-// h3El.textContent(currentQuestionTitle)
+    var currentQuestionTitle = currentQuestion.question
+    console.log(currentQuestionTitle);
+
 }
 
 
 
 function DisplayQuestions() {
-questions.innerText = questionsDB [currentQuestion].question
-option1.innerText = questionsDB[currentQuestion].answers[0]
-option2.innerText = questionsDB[currentQuestion].answers[1]
-option3.innerText = questionsDB[currentQuestion].answers[2]
-option4.innerText = questionsDB[currentQuestion].answers[3]
+    questions.innerText = questionsDB[currentQuestion].question
+    option1.innerText = questionsDB[currentQuestion].answers[0]
+    option2.innerText = questionsDB[currentQuestion].answers[1]
+    option3.innerText = questionsDB[currentQuestion].answers[2]
+    option4.innerText = questionsDB[currentQuestion].answers[3]
+    
 
 }
 function checkAnswer() {
     console.log("onClick");
     var userAnswer = this.getAttribute("data-value")
-    if (userAnswer === questionsDB[currentQuestion].correctAnswer){
-        score++;
+    if (userAnswer === questionsDB[currentQuestion].correctAnswer) {
+        score1++;
         answer.innerText = "You got it correct!";
-        
+
     } else {
-        answer.innerText = "You got it wrong!"; 
-    //for every wroong answer you loose 10 seconds
+        answer.innerText = "You got it wrong!";
+        //for every wrong answer you loose 10 seconds
     }
- if (currentQuestion < questionsDB.length - 1) {
-     currentQuestion++;
-     DisplayQuestions();
- } else {
-     console.log (score);
- }   
+    if (currentQuestion < questionsDB.length - 1) {
+        currentQuestion++;
+        DisplayQuestions();
+    } else {
+        challenge.style.display = "none";
+        results.style.display = "block";
+        score.textContent = "Score :" + score1;
+    }
 }
 
 

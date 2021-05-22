@@ -1,8 +1,18 @@
-.timer {
+#timer {
   text-align: right;
-  margin-right: 10;  
+  margin-right: 20px;  
 }
 
-.container, .container h1 {
+.container {
     text-align: center;
+    font-size: 20px;
+}
+
+#challenge {
+  text-align: center;
+  margin: auto;
+}
+
+#results {
+  text-align: center;
 }
