@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,24 +8,25 @@
     <title>Knowledge Check</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
-<header class="header">
-    <H3>View Highscore</H3>
-    <p class="timer">Timer:</p>
-</header>
-    <div id="challenge"></div>
-    
+    <header class="header">
+        <H3>View High Score</H3>
+        <p id="timer">Timer:0</p>
+    </header>
+  
+    <div class="container" id="instructions">
+        <h3>Instructions</h3>
+        <button id="start">Start Quiz</button>
+    </div>
+    <div id="challenge">
+        <h5 id="questions"></h5>
+        <button id="option-1" data-value="1"></button>
+        <button id="option-2" data-value="2"></button>
+        <button id="option-3" data-value="3"></button>
+        <button id="option-4" data-value="4"></button>
+    </div>
     <div id="results"></div>
-<div class="container">
-    <h1>Coding Quiz Challenge</h1>
-    <p>Try to answer the following code-related questions within the time limit.
-    Keep in mind that incorrect answers will penalize your score/time by ten
-    seconds!    
-    </p>
-    <button id="start">Start Quiz</button>
-
-</div>
-
 
 
     <footer>
@@ -33,4 +35,5 @@
 
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

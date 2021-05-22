@@ -1,20 +1,36 @@
+
 var timerEl = document.getElementById('countdown');
-var mainEl = document.getElementById('main');
-var startBtn = document.getElementById("#start");
+var startBtn = document.getElementById('start');
+var instructions = document.getElementById('instructions');
+var challenge = document.getElementById('challenge');
+var results = document.getElementById("results");
+var questions = document.getElementById('questions');
+var option1 = document.getElementById('option-1');
+var option2 = document.getElementById('option-2');
+var option3 = document.getElementById('option-3');
+var option4 = document.getElementById('option-4');
+
+
+var currentQuestion = 0;
 
 var message = ' All Done!';
-
+challenge.style.display="none";
+results.style.display="none";
+option1.addEventListener("click", checkAnswer);
+option2.addEventListener("click", checkAnswer);
+option3.addEventListener("click", checkAnswer);
+option4.addEventListener("click", checkAnswer);
 // Timer that counts down from 80 seconds
 function countdown() {
     var timeLeft = 80;
 
-    var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
-            timerEl.textContent = timeLeft + "seconds remaing";
+    var timeInterval = setInterval(function () {
+        if (timLeft > 1) {
+            timerEl.textContent = timeLeft;
             timerLeft--;
-        } else if (timLeft === 1) {
-            timerEl.textContent = timeLeft + "second remaing";
-            timeLeft--;
+        // } else if (timLeft === 1) {
+        //     timerEl.textContent = timeLeft;
+        //     timeLeft--;
         } else {
             timerEl.textContent = '';
             clearInterval(timeInterval);
@@ -23,84 +39,109 @@ function countdown() {
     }, 1000);
 }
 
+var body = document.body;
+var h1El = document.createElement("h1");
+var para = document.createElement("p");
+var h3El = document.createElement("h3");
+
+
+''
+// h1El.textContent = "Coding Quiz Challenge";
+// h1El.setAttribute('style', 'margin:auto; text-align:Center');
+// body.appendChild(h1El);
+
+
+// var node = document.createTextNode('Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!');
+// h3El.setAttribute('style', 'margin:auto; width:50%; text-align:center;');
+// para.appendChild(node);
+// var element = document.getElementById('challenge');
+// element.appendChild(para);
+
 
 // Coding Quiz Challenge
-var questions =[
+var questionsDB = [
     {
         question: "Commonly used data types Do NoT include:",
-        answers: {
-            1: "Strings",
-            2: "Booleans",
-            3: "Alerts",
-            4: "numbers"
-        },
+        answers: [
+            "Strings",
+            "Booleans",
+            "Alerts",
+            "numbers"
+        ],
         correctAnswer: "3"
     },
     {
         question: "The condition in an if / esle statement is enclosed within ______.",
-        answers: {
-            1: "Qoutes",            
-            2: "Curly Brackets",
-            3: "Parentheses",
-            4: "Square brackets"
-        },
+        answers: [
+            "Qoutes",
+            "Curly Brackets",
+            "Parentheses",
+            "Square brackets"
+        ],
         correctAnswer: "2"
     },
     {
         question: "Arrays in JavaScript can be used to store______.",
-        answers: {
-            1: "Numbers and Strings",
-            2: "Other arrays",
-            3: "Booleans",
-            4: "All of the above"
-        },
+        answers: [
+            "Numbers and Strings",
+            "Other arrays",
+            "Booleans",
+            "All of the above"
+        ],
         correctAnswer: "2"
     },
     {
         question: "String values must be enclosed within _______.",
-        answers: {
-            1: "Commas",
-            2: "Curly brackets",
-            3: "Quotes",
-            4: "Parentheses"
-        },
+        answers: [
+            "Commas",
+            "Curly brackets",
+            "Quotes",
+            "Parentheses"
+        ],
         correctAnswer: "3"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-        answers: {
-            1: "JavaScript",
-            2: "Terminal/bash",
-            3: "For Loops",
-            4: "Console Log"
-        },
+        answers: [
+            "JavaScript",
+            "Terminal/bash",
+            "For Loops",
+            "Console Log"
+        ],
         correctAnswer: "Console Log"
     },
 ]
 
 var score = 0;
 
-//try and answer he following code-related questions within the time limit. Keep in mind that incorrect answers will penilize your score/time bt ten seconds
 //start quiz
 
-function count
+function startGame() {
 
-//commmonly used data types Do NoT include: strings, booleans, alerts, numbers
+    challenge.style.display="block";
+    instructions.style.display="none";
+    DisplayQuestions(); 
+console.log(currentQuestion);
 
-//the condition in an if / else statement is enclosed within ______. 
-//answers: qoutes, culry brackets, parentheses, square brackets
+var currentQuestionTitle = currentQuestion.question
+console.log(currentQuestionTitle);
+// h3El.textContent(currentQuestionTitle)
+}
 
-//arrays in Javascript can be used to store_______. 
-//Answers: numbers and strings
-//other arrays(hint this is correct), booleans, all of the above
 
-// String values must be enclosed within _____ when bing assiged variables
-// answer commas, curly brackets, quotes, parentheses
 
-//A very useful tool used duirng development and debugging for printing content to the debugger is:
-// Javascript, terminal/bash, for loops, console log(this is correct)
+function DisplayQuestions() {
+questions.innerText = questionsDB [currentQuestion].question
+option1.innerText = questionsDB[currentQuestion].answers[0]
+option2.innerText = questionsDB[currentQuestion].answers[1]
+option3.innerText = questionsDB[currentQuestion].answers[2]
+option4.innerText = questionsDB[currentQuestion].answers[3]
 
-// all done
+}
+function checkAnswer() {
+    console.log("onClick");
+}
+
 
 // your final score is ""
 // enter intials, with the submit button
@@ -111,4 +152,5 @@ function count
 
 
 
-startBtn.onclick = countdown;
+startBtn.addEventListener('click', startGame);
+//endQuizBtn.addEventListener('click', highScore);
