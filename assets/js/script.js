@@ -1,5 +1,31 @@
+var timerEl = document.getElementById('countdown');
+var mainEl = document.getElementById('main');
+var startBtn = document.getElementById("#start");
+
+var message = ' All Done!';
+
+// Timer that counts down from 80 seconds
+function countdown() {
+    var timeLeft = 80;
+
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+            timerEl.textContent = timeLeft + "seconds remaing";
+            timerLeft--;
+        } else if (timLeft === 1) {
+            timerEl.textContent = timeLeft + "second remaing";
+            timeLeft--;
+        } else {
+            timerEl.textContent = '';
+            clearInterval(timeInterval);
+            displayMessage();
+        }
+    }, 1000);
+}
+
+
 // Coding Quiz Challenge
-const questions =[
+var questions =[
     {
         question: "Commonly used data types Do NoT include:",
         answers: {
@@ -52,8 +78,12 @@ const questions =[
     },
 ]
 
+var score = 0;
+
 //try and answer he following code-related questions within the time limit. Keep in mind that incorrect answers will penilize your score/time bt ten seconds
 //start quiz
+
+function count
 
 //commmonly used data types Do NoT include: strings, booleans, alerts, numbers
 
@@ -77,3 +107,8 @@ const questions =[
 
 //high scores : list high scores by highest score
 // add go back button and clear high scores button
+
+
+
+
+startBtn.onclick = countdown;

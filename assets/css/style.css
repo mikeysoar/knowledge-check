@@ -1,0 +1,8 @@
+.timer {
+  text-align: right;
+  margin-right: 10;  
+}
+
+.container, .container h1 {
+    text-align: center;
+}
