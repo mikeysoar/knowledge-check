@@ -9,7 +9,7 @@ var option1 = document.getElementById('option-1');
 var option2 = document.getElementById('option-2');
 var option3 = document.getElementById('option-3');
 var option4 = document.getElementById('option-4');
-
+var answer = document.getElementById('answer');
 
 var currentQuestion = 0;
 
@@ -108,7 +108,7 @@ var questionsDB = [
             "For Loops",
             "Console Log"
         ],
-        correctAnswer: "Console Log"
+        correctAnswer: "4"
     },
 ]
 
@@ -140,6 +140,21 @@ option4.innerText = questionsDB[currentQuestion].answers[3]
 }
 function checkAnswer() {
     console.log("onClick");
+    var userAnswer = this.getAttribute("data-value")
+    if (userAnswer === questionsDB[currentQuestion].correctAnswer){
+        score++;
+        answer.innerText = "You got it correct!";
+        
+    } else {
+        answer.innerText = "You got it wrong!"; 
+    //for every wroong answer you loose 10 seconds
+    }
+ if (currentQuestion < questionsDB.length - 1) {
+     currentQuestion++;
+     DisplayQuestions();
+ } else {
+     console.log (score);
+ }   
 }
 
 
