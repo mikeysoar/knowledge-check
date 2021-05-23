@@ -1,4 +1,4 @@
-
+var body = document.body;
 var timerEl = document.getElementById('countdown');
 var startBtn = document.getElementById('start');
 var instructions = document.getElementById('instructions');
@@ -11,39 +11,29 @@ var option3 = document.getElementById('option-3');
 var option4 = document.getElementById('option-4');
 var answer = document.getElementById('answer');
 var score = document.getElementById('score');
+var userInitials = document.getElementById('user-initials');
+var saveBtn = document.getElementById('save');
 
 var currentQuestion = 0;
 
-var message = ' All Done!';
 challenge.style.display = "none";
 results.style.display = "none";
 option1.addEventListener("click", checkAnswer);
 option2.addEventListener("click", checkAnswer);
 option3.addEventListener("click", checkAnswer);
 option4.addEventListener("click", checkAnswer);
+
 // Timer that counts down from 80 seconds
 function countdown() {
     var timeLeft = 80;
 
-    var timeInterval = setInterval(function () {
-        if (timLeft > 1) {
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
             timerEl.textContent = timeLeft;
-            timerLeft--;
-            // } else if (timLeft === 1) {
-            //     timerEl.textContent = timeLeft;
-            //     timeLeft--;
-        } else {
-            timerEl.textContent = '';
-            clearInterval(timeInterval);
-            displayMessage();
+            timeLeft--;          
         }
     }, 1000);
-}
-
-var body = document.body;
-// var h1El = document.createElement("h1");
-// var para = document.createElement("p");
-// var h3El = document.createElement("h3");
+} 
 
 // Coding Quiz Challenge
 var questionsDB = [
@@ -115,17 +105,14 @@ function startGame() {
 
 }
 
-
-
 function DisplayQuestions() {
     questions.innerText = questionsDB[currentQuestion].question
     option1.innerText = questionsDB[currentQuestion].answers[0]
     option2.innerText = questionsDB[currentQuestion].answers[1]
     option3.innerText = questionsDB[currentQuestion].answers[2]
     option4.innerText = questionsDB[currentQuestion].answers[3]
-    
-
 }
+
 function checkAnswer() {
     console.log("onClick");
     var userAnswer = this.getAttribute("data-value")
@@ -153,9 +140,25 @@ function checkAnswer() {
 
 //high scores : list high scores by highest score
 // add go back button and clear high scores button
+function renderLastRegistered() {
+    var userInitials = localStorage.getItem("user-initials");
+    var score = localStorage.getItem("score");
 
+    if (userInitials === null) {
+        return;
+
+    }
+    renderLastRegistered('user-initials');
+}
+
+saveBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    localStorage.setItem("user-initials");
+    localStorage.setItem("score");
+});
 
 
 
 startBtn.addEventListener('click', startGame);
-//endQuizBtn.addEventListener('click', highScore);
+startBtn.onclick = countdown
