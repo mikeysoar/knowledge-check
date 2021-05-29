@@ -13,8 +13,10 @@ var answer = document.getElementById('answer');
 var score = document.getElementById('score');
 var userInitials = document.getElementById('user-initials');
 var saveBtn = document.getElementById('save');
+var timeInterval
+var timeLeft
 
-var currentQuestion = 0;
+var currentQuestion 
 
 challenge.style.display = "none";
 results.style.display = "none";
@@ -25,15 +27,17 @@ option4.addEventListener("click", checkAnswer);
 
 // Timer that counts down from 80 seconds
 function countdown() {
-    var timeLeft = 80;
+    timeLeft = 80;
 
-    var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
+    timeInterval = setInterval(function () {
+        if (timeLeft > 0) {
             timerEl.textContent = timeLeft;
-            timeLeft--;          
+            timeLeft--;
+        } else if (timeLeft <= 0) {
+            clearInterval(timeInterval)
         }
     }, 1000);
-} 
+}
 
 // Coding Quiz Challenge
 var questionsDB = [
@@ -88,7 +92,7 @@ var questionsDB = [
         correctAnswer: "4"
     },
 ]
-
+// score needs to be time
 var score1 = 0;
 
 //start quiz
@@ -123,6 +127,7 @@ function checkAnswer() {
     } else {
         answer.innerText = "You got it wrong!";
         //for every wrong answer you loose 10 seconds
+        timeLeft = timeLeft - 10;
     }
     if (currentQuestion < questionsDB.length - 1) {
         currentQuestion++;
@@ -130,35 +135,55 @@ function checkAnswer() {
     } else {
         challenge.style.display = "none";
         results.style.display = "block";
-        score.textContent = "Score :" + score1;
+        score.textContent = "Score :" + timeLeft;
+        clearInterval(timeInterval);
     }
 }
 
+// save high score
+// view highscore
+// function playerInitials() {
+//     var userInitials = localStorage.getItem("user-initials");
+//     var score = localStorage.getItem("score");
 
-// your final score is ""
-// enter intials, with the submit button
+//     if (userInitials === null) {
+//         return;
+//     }
 
-//high scores : list high scores by highest score
-// add go back button and clear high scores button
-function renderLastRegistered() {
-    var userInitials = localStorage.getItem("user-initials");
-    var score = localStorage.getItem("score");
+//     // Set the user initials to the corresponding value
 
-    if (userInitials === null) {
-        return;
+//     localStorage.setItem("user-initials");
+//     localStorage.setItem("score");
 
-    }
-    renderLastRegistered('user-initials');
-}
+//     playerInitials('user-initials');
+// }
 
-saveBtn.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    localStorage.setItem("user-initials");
-    localStorage.setItem("score");
-});
+// saveBtn.addEventListener('click', function (event) {
+//     event.preventDefault();
 
 
+// });
+
+function scoreKeeper () {
+    var highScores = [];
+    var savedScore = {
+        initialas: userInitialsValue,
+        score: timeLeft
+    };
+    highScores.push(savedScore);
+
+    highScores = highScores.concat(json.parse(localStorage.getitem("highScores") || '[]'));
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    console.log(highScores);
+
+    for (i = 0; < highScores.length; i++) {
+        var newDiv = document.createElement("div");
+        newDiv.setAttribute("id", "high-score");
+        newDiv.innerHTML = highScores[i].initials + ":" + highScores[i].score;
+        document.body.appendChild(newDiv);
+    };
+};
 
 startBtn.addEventListener('click', startGame);
 startBtn.onclick = countdown

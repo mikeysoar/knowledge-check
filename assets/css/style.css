@@ -1,3 +1,8 @@
+.header {
+  flex-wrap: flex;
+  justify-content: space-between;
+}
+
 #timer {
   text-align: right;
   margin-right: 20px;  
@@ -15,4 +20,8 @@
 
 #results {
   text-align: center;
+}
+
+footer h5 {
+  margin-bottom: 20px;
 }
