@@ -11,12 +11,13 @@ var option3 = document.getElementById('option-3');
 var option4 = document.getElementById('option-4');
 var answer = document.getElementById('answer');
 var score = document.getElementById('score');
-var userInitials = document.getElementById('user-initials');
 var saveBtn = document.getElementById('save');
 var timeInterval
 var timeLeft
+var userInitials = []
+var highScore = document.getElementById('high-score');
 
-var currentQuestion 
+var currentQuestion = 0;
 
 challenge.style.display = "none";
 results.style.display = "none";
@@ -140,50 +141,37 @@ function checkAnswer() {
     }
 }
 
+function endOfGame(event) {
+    var userInitialsEl = document.getElementById('user-initials').value;
+    console.log(userInitials);
+    var tempObj = {
+        userInitialsEl,
+        timeLeft,
+    }
+    userInitials.push(tempObj);
+    for (var i = 0; i < userInitials.length; i++) {
+        const liEl = document.createElement('li');
+        liEl.textContent = userInitials[i].userInitialsEl + ' score: ' + userInitials[i].timeLeft
+        console.log(highScore);
+        highScore.appendChild(liEl);
+    }
+    localStorage.setItem('highScore', JSON.stringify(userInitials))
+}
+
 // save high score
-// view highscore
-// function playerInitials() {
-//     var userInitials = localStorage.getItem("user-initials");
-//     var score = localStorage.getItem("score");
+function scoreBoard() {
+    userInitials = JSON.parse(localStorage.getItem('highScore')) || [];
+    console.log(userInitials);
 
-//     if (userInitials === null) {
-//         return;
-//     }
-
-//     // Set the user initials to the corresponding value
-
-//     localStorage.setItem("user-initials");
-//     localStorage.setItem("score");
-
-//     playerInitials('user-initials');
-// }
-
-// saveBtn.addEventListener('click', function (event) {
-//     event.preventDefault();
-
-
-// });
-
-function scoreKeeper () {
-    var highScores = [];
-    var savedScore = {
-        initialas: userInitialsValue,
-        score: timeLeft
-    };
-    highScores.push(savedScore);
-
-    highScores = highScores.concat(json.parse(localStorage.getitem("highScores") || '[]'));
-
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-    console.log(highScores);
-
-    for (i = 0; < highScores.length; i++) {
-        var newDiv = document.createElement("div");
-        newDiv.setAttribute("id", "high-score");
-        newDiv.innerHTML = highScores[i].initials + ":" + highScores[i].score;
-        document.body.appendChild(newDiv);
-    };
+    if (userInitials === null) {
+        return;
+    }
+    userInitials.textContent = userInitials;
+    score.textcontent = userInitials;
 };
+scoreBoard();
+
+saveBtn.addEventListener('click', endOfGame);
 
 startBtn.addEventListener('click', startGame);
 startBtn.onclick = countdown
