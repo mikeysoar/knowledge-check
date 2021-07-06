@@ -24,3 +24,4 @@ https://mikeysoar.github.io/knowledge-check/
 
 ## Contributions
 Michael Warner :smiley:
+Tutor: Eric Sayer. Thanks for your support!
